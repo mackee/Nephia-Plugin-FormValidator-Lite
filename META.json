@@ -1,7 +1,7 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "FormValidator::Lite plugin for Nephia",
    "author" : [
-      "mackee <macopy123[attttt]gmai.com>"
+      "MACOPY <macopy123[attttt]gmai.com>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Minilla/v0.5.3, CPAN::Meta::Converter version 2.130880",
@@ -42,6 +42,9 @@
       },
       "runtime" : {
          "requires" : {
+            "FormValidator::Lite" : "0",
+            "Nephia" : "0.23",
+            "Nephia::DSLModifier" : "0",
             "perl" : "5.008005"
          }
       },
@@ -52,5 +55,16 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/mackee/Nephia-Plugin-FormValidator-Lite/issues"
+      },
+      "homepage" : "https://github.com/mackee/Nephia-Plugin-FormValidator-Lite",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/mackee/Nephia-Plugin-FormValidator-Lite.git",
+         "web" : "https://github.com/mackee/Nephia-Plugin-FormValidator-Lite"
+      }
+   },
    "version" : "0.01"
 }
