@@ -1,4 +1,4 @@
-package MyApp;
+package Nephia::TestApp;
 use strict;
 use warnings;
 use Nephia plugins => [qw/FormValidator::Lite/];
@@ -15,14 +15,14 @@ path '/' => sub {
 
 post '/form' => sub {
     my $res = form(
-        name => [qw/NOT_NULL/],
-        name_kana => [qw/NOT_NULL KATAKANA/],
-        mail => [qw/NOT_NULL EMAIL/],
+        first_name => [qw/NOT_NULL/],
+        last_name => [qw/NOT_NULL/],
+        mail => [qw/NOT_NULL EMAIL_LOOSE/],
     );
     $res->set_param_message(
-        name => '名前',
-        name_kana => 'カナ',
-        mail => 'メールアドレス'
+        first_name => 'FIRST NAME',
+        last_name => 'LAST NAME',
+        mail => 'E-MAIL ADDRESS'
     );
 
     if ($res->has_error) {
@@ -35,10 +35,16 @@ post '/form' => sub {
     }
     else {
         my $req = req;
+        my $first_name = $req->param('first_name');
+        my $last_name = $req->param('last_name');
+        my $full_name = sprintf('%s %s', $first_name, $last_name);
+        my $mail = $req->param('mail');
         return {
-            name => [$req->param('name')],
-            name_kana => [$req->param('name_kana')],
-            mail => [$req->param('mail')],
+            template => 'confirm.html',
+            title    => config->{appname},
+            envname  => config->{envname},
+            full_name => $full_name,
+            mail => $mail,
         };
     }
 };

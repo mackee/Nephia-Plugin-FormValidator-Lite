@@ -4,7 +4,7 @@
       "MACOPY <macopy123[attttt]gmai.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.5.3, CPAN::Meta::Converter version 2.130880",
+   "generated_by" : "Minilla/v0.5.3, CPAN::Meta::Converter version 2.131560",
    "license" : [
       "perl_5"
    ],
@@ -62,7 +62,7 @@
       "homepage" : "https://github.com/mackee/Nephia-Plugin-FormValidator-Lite",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/mackee/Nephia-Plugin-FormValidator-Lite.git",
+         "url" : "git://github.com/mackee/Nephia-Plugin-FormValidator-Lite",
          "web" : "https://github.com/mackee/Nephia-Plugin-FormValidator-Lite"
       }
    },
