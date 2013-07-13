@@ -2,6 +2,10 @@ Revision history for Perl extension Nephia-Plugin-FormValidator-Lite
 
 {{$NEXT}}
 
+0.02 2013-07-13T02:12:35Z
+
+    - support for Nephia-0.31 higher
+
 0.01 2013-07-02T15:07:43Z
 
     - original version
