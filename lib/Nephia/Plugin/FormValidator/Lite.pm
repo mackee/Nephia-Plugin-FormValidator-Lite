@@ -4,16 +4,22 @@ use strict;
 use warnings;
 
 our $VERSION = "0.01";
+our @EXPORT = qw/form/;
+our $APP_CLASS;
 
-use Nephia::DSLModifier;
 use FormValidator::Lite;
 use Carp qw/croak/;
 use Try::Tiny;
 
+sub load {
+    my ($class, $app) = @_;
+    $APP_CLASS = $app;
+}
+
 sub form(@) {
     my %rule = @_;
-    my $req = origin('req')->();
-    my $conf = origin('config')->()->{'Plugin::FormValidator::Lite'};
+    my $req = $APP_CLASS->can('req')->();
+    my $conf = $APP_CLASS->can('config')->()->{'Plugin::FormValidator::Lite'};
     try {
         FormValidator::Lite->load_constraints(@{$conf->{constants}});
     }

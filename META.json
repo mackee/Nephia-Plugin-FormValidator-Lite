@@ -43,8 +43,7 @@
       "runtime" : {
          "requires" : {
             "FormValidator::Lite" : "0",
-            "Nephia" : "0.23",
-            "Nephia::DSLModifier" : "0",
+            "Nephia" : "0.31",
             "perl" : "5.008005"
          }
       },
