@@ -10,8 +10,13 @@ use File::Basename qw/dirname/;
 use lib File::Spec->catdir(dirname(__FILE__), 'nephia-test_app','lib');
 use Nephia::TestApp;
 
-my $psgi = File::Spec->catfile(dirname(__FILE__), 'test.psgi');
-my $app = Plack::Util::load_psgi($psgi);
+my $app = Nephia::TestApp->run(
+    appname => 'MyApp',
+    'Plugin::FormValidator::Lite' => {
+        function_message => 'en',
+        constants => [qw/Email/]
+    }
+);
 
 test_psgi $app, sub {
     my $cb = shift;

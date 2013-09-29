@@ -10,4 +10,4 @@ my $config = require( Config::Micro->file(
     dir => File::Spec->catdir('nephia-test_app','etc','conf')
 ));
 
-Nephia::TestApp->run( $config );
+Nephia::TestApp->run( %$config );

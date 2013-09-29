@@ -4,47 +4,54 @@ use strict;
 use warnings;
 
 our $VERSION = "0.02";
-our @EXPORT = qw/form/;
-our $APP_CLASS;
 
 use FormValidator::Lite;
 use Carp qw/croak/;
 use Try::Tiny;
+use parent 'Nephia::Plugin';
 
-sub load {
-    my ($class, $app) = @_;
-    $APP_CLASS = $app;
+sub new {
+    my ($class, %opts) = @_;
+    my $self = $class->SUPER::new(%opts);
+    $self->{RUN_SQL} = [];
+    return $self;
 }
 
+sub exports { qw/form/ }
+
 sub form(@) {
-    my %rule = @_;
-    my $req = $APP_CLASS->can('req')->();
-    my $conf = $APP_CLASS->can('config')->()->{'Plugin::FormValidator::Lite'};
-    try {
-        FormValidator::Lite->load_constraints(@{$conf->{constants}});
-    }
-    catch {
-        croak 'Constraints of FormValidator::Lite is invalid format in config';
+    my $self = shift;
+    my $context = shift;
+    sub (@) {
+        my %rule = @_;
+        my $req = $context->get('req');
+        my $conf = $context->get('config')->{'Plugin::FormValidator::Lite'};
+        try {
+            FormValidator::Lite->load_constraints(@{$conf->{constants}});
+        }
+        catch {
+            croak 'Constraints of FormValidator::Lite is invalid format in config';
+        };
+
+        my $validator;
+        try {
+            $validator = FormValidator::Lite->new($req);
+            $validator->load_function_message($conf->{function_message});
+            $validator->check(
+                %rule
+            );
+
+            # default param message is param key
+            $validator->set_param_message(
+                map { $_, $_ } keys %rule
+            );
+        }
+        catch {
+            die $_;
+        };
+
+        return $validator;
     };
-
-    my $validator;
-    try {
-        $validator = FormValidator::Lite->new($req);
-        $validator->load_function_message($conf->{function_message});
-        $validator->check(
-            %rule
-        );
-
-        # default param message is param key
-        $validator->set_param_message(
-            map { $_, $_ } keys %rule
-        );
-    }
-    catch {
-        die $_;
-    };
-
-    return $validator;
 }
 
 1;
