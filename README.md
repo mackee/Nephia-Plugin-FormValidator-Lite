@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/mackee/Nephia-Plugin-FormValidator-Lite.png?branch=master)](https://travis-ci.org/mackee/Nephia-Plugin-FormValidator-Lite)
 # NAME
 
 Nephia::Plugin::FormValidator::Lite - FormValidator::Lite plugin for Nephia
